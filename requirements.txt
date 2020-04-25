@@ -1,5 +1,5 @@
 django<3
-djangorestframework==3.9.0
+djangorestframework==3.9.1
 djangorestframework-camel-case==1.0.3
 django-extra-fields
 drf_yasg
