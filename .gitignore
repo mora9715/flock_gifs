@@ -1,0 +1,15 @@
+.secure
+.SECURE
+.idea
+*.pyc
+*.bak
+*~
+.DS_Store
+/tmp
+/clear
+/static_deploy
+/logs/
+/venv/
+/img/
+db.sqlite3
+
