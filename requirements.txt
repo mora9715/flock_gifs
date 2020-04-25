@@ -1,6 +1,6 @@
 django<3
-djangorestframework==3.9.0
-djangorestframework-camel-case==1.0.3
+djangorestframework
+djangorestframework-camel-case
 django-extra-fields
 drf_yasg
 Pillow
