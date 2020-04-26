@@ -17,7 +17,6 @@ import datetime
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -28,7 +27,6 @@ SECRET_KEY = 'hhw^*wh$q@@5j1s_%!_3(s^kn8_*xhq_#cel85&*h*ztpbau5g'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -79,7 +77,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'flock_gifs.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -89,7 +86,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -109,8 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -124,7 +118,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATIC_URL = '/static/'
@@ -134,9 +127,20 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'apps.flock.authentication.FlockJwtAuthentication',
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
+        'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',
+    ),
+
+    'DEFAULT_PARSER_CLASSES': (
+        'djangorestframework_camel_case.parser.CamelCaseFormParser',
+        'djangorestframework_camel_case.parser.CamelCaseMultiPartParser',
+        'djangorestframework_camel_case.parser.CamelCaseJSONParser',
     ),
 }
 
@@ -155,8 +159,8 @@ SWAGGER_SETTINGS = {
 }
 
 JWT_AUTH = {
-    'JWT_SECRET_KEY': 'doge',
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=8 )
+    'JWT_SECRET_KEY': '',  # Secret token of your Flock APP
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=8)
 }
 
 # Images settings
@@ -164,7 +168,7 @@ THUMBNAIL_SIZE = (50, 50)
 
 # Flock settings
 FLOCK_ENDPOINT = 'api.flock.co'
-FLOCK_TOKEN = ''
+FLOCK_TOKEN = ''  # Flock user/app token
 FLOCK_ATTACHMENT_COLOR = "#ffffff"
 FLOCK_ATTACHMENT_WIDTH = 150
 FLOCK_ATTACHMENT_HEIGHT = 150

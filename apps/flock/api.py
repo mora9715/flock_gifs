@@ -2,7 +2,6 @@ from rest_framework import viewsets, status, routers, mixins, exceptions
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
-from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from django.core.exceptions import ObjectDoesNotExist
 
 from apps.flock import serializers, models
@@ -11,7 +10,6 @@ from apps.flock import serializers, models
 class EventViewSet(viewsets.GenericViewSet):
     serializer_class = serializers.EventSerializer
     permission_classes = (AllowAny,)
-    parser_classes = (CamelCaseJSONParser,)
 
     @action(detail=False, methods=['post'], url_path='event')
     def event(self, request, *args, **kwargs):
@@ -31,7 +29,6 @@ class EventViewSet(viewsets.GenericViewSet):
 class FeaturedViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
     queryset = models.User.objects.all()
     serializer_class = serializers.UserFeaturedSerializer
-    permission_classes = (AllowAny,)
 
     lookup_field = 'user_id'
     lookup_url_kwarg = 'user_id'

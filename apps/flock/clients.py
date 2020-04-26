@@ -3,7 +3,6 @@ from urllib.parse import urlencode
 
 from django.conf import settings
 
-
 class PatchedClient(Client):
     # These are the supported HTTP verbs
     methods = {'delete', 'get', 'patch', 'post', 'put'}
