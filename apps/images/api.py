@@ -1,6 +1,5 @@
 from rest_framework import routers, serializers, viewsets, parsers, status, mixins
 from rest_framework.decorators import action
-from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from apps.images import models, serializers
@@ -13,7 +12,6 @@ class ImageViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet, mixins.Li
     queryset = models.ImageModel.objects.all()
     serializer_class = serializers.ImageSerializer
     parser_class = (ImageUploadParser,)
-    permission_classes = (AllowAny,)
 
     lookup_field = 'id'
     lookup_url_kwarg = 'id'

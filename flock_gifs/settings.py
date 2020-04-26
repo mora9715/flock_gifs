@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import socket
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     # 'djangorestframework_camel_case',
     'drf_yasg',
+    'rest_framework_jwt',
     'apps.images',
     'apps.flock'
 ]
@@ -107,6 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -123,15 +127,37 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    os.path.join(BASE_DIR, "img"),
-]
 
-# Swagger settings
-from .settings_swagger import *
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    },
+    'USE_SESSION_AUTH': True,
+    'LOGIN_URL': r'/admin',
+    'VALIDATOR_URL': None,
+    'DEFAULT_API_URL': "https://{}".format(socket.gethostname()),
+}
+
+JWT_AUTH = {
+    'JWT_SECRET_KEY': 'doge',
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=8 )
+}
 
 # Images settings
 THUMBNAIL_SIZE = (50, 50)
