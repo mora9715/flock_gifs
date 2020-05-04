@@ -1,6 +1,7 @@
 import re
 
 from rest_framework import serializers, exceptions
+from drf_extra_fields.fields import Base64ImageField
 
 from apps.images.models import ImageModel
 from apps.flock.models import User
@@ -101,6 +102,10 @@ class EventSerializer(serializers.Serializer):
 
 
 class FeaturedSerializer(serializers.ModelSerializer):
+    image = Base64ImageField(use_url=False, required=True)
+    thumbnail = Base64ImageField(use_url=False, required=False)
+    max_width = serializers.IntegerField()
+    max_height = serializers.IntegerField()
     class Meta:
         model = ImageModel
         exclude = ('ts',)
@@ -108,10 +113,9 @@ class FeaturedSerializer(serializers.ModelSerializer):
 
 class UserFeaturedSerializer(serializers.ModelSerializer):
     featured = FeaturedSerializer(many=True, read_only=True)
-
     class Meta:
         model = User
-        fields = ('featured',)
+        fields = ('featured', 'image_meta')
 
 class FeaturedUpdateSerializer(serializers.Serializer):
     remove = serializers.ListField(

@@ -42,7 +42,7 @@ class FeaturedViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
             user = self.get_queryset().get(user_id=user_id)
         except ObjectDoesNotExist:
             raise exceptions.NotFound
-
+        print(self.request.data)
         serializer = serializers.FeaturedUpdateSerializer(data=self.request.data)
         serializer.is_valid(raise_exception=True)
         serializer.update(user)

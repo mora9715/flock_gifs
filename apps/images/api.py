@@ -8,7 +8,7 @@ from apps.images import models, serializers
 class ImageUploadParser(parsers.FileUploadParser):
     media_type = 'image/*'
 
-class ImageViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet, mixins.ListModelMixin):
+class ImageViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     queryset = models.ImageModel.objects.all()
     serializer_class = serializers.ImageSerializer
     parser_class = (ImageUploadParser,)
@@ -27,6 +27,17 @@ class ImageViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet, mixins.Li
         images = self.get_queryset().filter(id=id)
         serializer = serializers.ImageSerializer(images, many=True)
         return Response(serializer.data)
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        serialized_user = serializers.ImageMetaSerializer(self.request.user)
+        serialized_images = self.get_serializer(queryset, many=True)
+
+        return Response({
+            'images': serialized_images.data,
+            **serialized_user.data
+        })
 
 
 router = routers.DefaultRouter()

@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.html import mark_safe
+from django.conf import settings
 # Create your models here.
 
 class ImageModel(models.Model):
@@ -21,3 +22,9 @@ class ImageModel(models.Model):
 
     def thumbnail_tag(self):
         return mark_safe(f'<img src="http://127.0.0.1:8000/{self.thumbnail.name}" height="50" />')
+
+    def max_width(self):
+        return settings.FLOCK_ATTACHMENT_WIDTH
+
+    def max_height(self):
+        return settings.FLOCK_ATTACHMENT_HEIGHT

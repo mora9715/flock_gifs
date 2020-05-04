@@ -2,6 +2,7 @@ from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
 
 from apps.images import models, utils
+from apps.flock.models import User
 
 
 class ThumbnailSerializer(serializers.Serializer):
@@ -30,3 +31,11 @@ class ImageSerializer(serializers.ModelSerializer):
         )
         obj.save()
         return obj
+
+
+class ImageMetaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('image_meta',)
+

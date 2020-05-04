@@ -24,7 +24,8 @@ def convert_to_thumb(image):
             buffered,
             save_all=True,
             append_images=list(frames),
-            format=thumb.format
+            format=thumb.format,
+            loop=True
         )
     else:
         thumb.thumbnail(settings.THUMBNAIL_SIZE)
