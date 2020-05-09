@@ -32,3 +32,22 @@ def convert_to_thumb(image):
         thumb.save(buffered, format=thumb.format)
 
     return base64.b64encode(buffered.getvalue()).decode()
+
+
+def convert_to_base64(path):
+    buffered = BytesIO()
+    img = Image.open(path)
+    if img.format == 'GIF':
+        frames = ImageSequence.Iterator(img)
+        img.save(
+            buffered,
+            save_all=True,
+            append_images=list(frames),
+            format=img.format,
+            loop=True
+        )
+    else:
+        img.save(buffered, format=img.format)
+
+    return base64.b64encode(buffered.getvalue()).decode()
+

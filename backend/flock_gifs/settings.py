@@ -178,5 +178,8 @@ FLOCK_ATTACHMENT_HEIGHT = 150
 FRONTEND_PORT=os.environ.get('FRONTEND_PORT', 2053)
 
 
-CORS_ORIGIN_WHITELIST = [os.environ.get('APP_HOST','hc.eugene-prodan.com')]
+CORS_ORIGIN_WHITELIST = [
+    f"https://{os.environ.get('APP_HOST','hc.eugene-prodan.com')}",
+    f"http://{os.environ.get('APP_HOST','hc.eugene-prodan.com')}"
+]
 CORS_ALLOW_HEADERS = ['authorization', 'content-type']
