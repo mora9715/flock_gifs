@@ -1,7 +1,9 @@
 # Flock Images App
 
-Backend for a simple Flock app that allows uploading images and sending them, using slash command
+A simple Flock app to upload images and post them to chat using slash command
 
 ## Features
 - Automatic user add/delete managment
-- Possibility to add/delete image to Featured Images (for a particular user)
+- Automatic thumbnail generation for previews, including GIF animations
+- Possibility to add/delete image to Featured (for a particular user)
+- Per-user settings such as max image height/width
