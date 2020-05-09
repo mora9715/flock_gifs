@@ -175,6 +175,8 @@ FLOCK_TOKEN = os.environ.get('FLOCK_TOKEN')  # Flock user/app token
 FLOCK_ATTACHMENT_COLOR = "#ffffff"
 FLOCK_ATTACHMENT_WIDTH = 150
 FLOCK_ATTACHMENT_HEIGHT = 150
+FRONTEND_PORT=os.environ.get('FRONTEND_PORT', 2053)
+
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_HEADERS = ['authorization', 'content-type']

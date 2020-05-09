@@ -75,7 +75,7 @@ class EventSerializer(serializers.Serializer):
         img_name = self.validated_data.get('text', '').strip()
 
         try:
-            img_tag = f"https://{request.META['HTTP_HOST']}/{ImageModel.objects.get(name=img_name).image}"
+            img_tag = f"https://{request.META['HTTP_HOST']}:{settings.FRONTEND_PORT}/{ImageModel.objects.get(name=img_name).image}"
         except ImageModel.DoesNotExist:
             return True
 
