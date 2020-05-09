@@ -167,7 +167,7 @@ JWT_AUTH = {
 }
 
 # Images settings
-THUMBNAIL_SIZE = (100, 100)
+THUMBNAIL_SIZE = (150, 150)
 
 # Flock settings
 FLOCK_ENDPOINT = 'api.flock.co'
