@@ -20,13 +20,14 @@ class ImageSerializer(serializers.ModelSerializer):
     def validate_name(self, name):
         return name.strip()
 
-    def save(self):
+    def save(self, user):
         thumb = utils.convert_to_thumb(self.get_initial()['image'])
 
         thumb_serializer = ThumbnailSerializer(data={'thumbnail': thumb})
         thumb_serializer.is_valid(raise_exception=True)
         obj = models.ImageModel(
             **self.validated_data,
+            uploaded_by=user,
             thumbnail=thumb_serializer.validated_data['thumbnail']
         )
         obj.save()

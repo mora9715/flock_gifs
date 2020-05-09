@@ -20,7 +20,7 @@ class ImageViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     def upload(self, request, *args, **kwargs):
         file_serializer = self.serializer_class(data=request.data)
         file_serializer.is_valid(raise_exception=True)
-        file_serializer.save()
+        file_serializer.save(self.request.user)
         return Response(file_serializer.data, status=status.HTTP_201_CREATED)
 
     def retrieve(self, request, id, *args, **kwargs):
