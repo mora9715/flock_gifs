@@ -56,7 +56,7 @@ export default {
   },
   computed: {
     source: function() {
-      return `${this.$globals.backend}/${this.img.image}`;
+      return `${this.$globals.backend}/${this.img.thumbnail}`;
     }
   },
 }
