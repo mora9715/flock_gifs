@@ -26,11 +26,12 @@ SECRET_KEY = 'hhw^*wh$q@@5j1s_%!_3(s^kn8_*xhq_#cel85&*h*ztpbau5g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['hc.eugene-prodan.com']
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'jet',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -54,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'flock_gifs.urls'
@@ -121,7 +124,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -159,7 +162,7 @@ SWAGGER_SETTINGS = {
 }
 
 JWT_AUTH = {
-    'JWT_SECRET_KEY': '',  # Secret token of your Flock APP
+    'JWT_SECRET_KEY': os.environ.get('APP_SECRET_KEY'),  # Secret token of your Flock APP
     'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=8)
 }
 
@@ -168,7 +171,10 @@ THUMBNAIL_SIZE = (50, 50)
 
 # Flock settings
 FLOCK_ENDPOINT = 'api.flock.co'
-FLOCK_TOKEN = ''  # Flock user/app token
+FLOCK_TOKEN = os.environ.get('FLOCK_TOKEN')  # Flock user/app token
 FLOCK_ATTACHMENT_COLOR = "#ffffff"
 FLOCK_ATTACHMENT_WIDTH = 150
 FLOCK_ATTACHMENT_HEIGHT = 150
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_HEADERS = ['authorization', 'content-type']

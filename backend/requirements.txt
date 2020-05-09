@@ -2,8 +2,10 @@ django<3
 djangorestframework
 djangorestframework-camel-case
 django-extra-fields
+django-cors-headers
 drf_yasg
 Pillow
 django-jet
 python_http_client
 drf-jwt
+gunicorn

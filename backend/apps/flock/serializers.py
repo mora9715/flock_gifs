@@ -15,7 +15,7 @@ class EventSerializer(serializers.Serializer):
     token = serializers.CharField(
         max_length=100,
         required=False,
-        allow_null=True
+        allow_null=True,
     )
     chat = serializers.CharField(
         max_length=100,

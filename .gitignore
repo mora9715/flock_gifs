@@ -12,4 +12,5 @@
 /venv/
 /img/
 db.sqlite3
-
+.backend.env
+.frontend.env

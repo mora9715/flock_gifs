@@ -1,0 +1,5 @@
+.git
+venv
+node-modules
+.backend.env
+.frontend.env

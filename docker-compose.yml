@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Docker/backend/Dockerfile
+    command: bash -c "gunicorn flock_gifs.wsgi -b 0.0.0.0:8000 -w 1 --threads=100 --access-logfile=- "
+    env_file:
+      - .backend.env
+    volumes:
+      - /home/mora/sandbox/img/:/application/img/
+      - /home/mora/sandbox/db.sqlite3:/application/db.sqlite3
+
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Docker/frontend/Dockerfile
+    ports:
+      - "2053:2053"
+    volumes:
+      - /home/mora/sandbox/img/:/usr/share/img/
+      - /home/mora/sandbox/certs/:/etc/nginx/certs/
+    depends_on:
+      - backend
