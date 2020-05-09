@@ -46,10 +46,10 @@ class EventSerializer(serializers.Serializer):
         user = [u for u in response.to_dict if u['id'] == self.validated_data['user_id']]
         if len(user) != 1:
             raise exceptions.ParseError
-        name = user.get('firstName', '') + ' ' + user.get('lastName', '')
+        name = user[0].get('firstName', '') + ' ' + user[0].get('lastName', '')
         name = re.sub('[^a-zA-Z ]+', '', name).strip()
         obj, created = User.objects.get_or_create(
-            user_id=user['id'],
+            user_id=user[0]['id'],
             name=name,
             token=self.validated_data['token']
         )
