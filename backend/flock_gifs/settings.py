@@ -26,7 +26,7 @@ SECRET_KEY = 'hhw^*wh$q@@5j1s_%!_3(s^kn8_*xhq_#cel85&*h*ztpbau5g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['hc.eugene-prodan.com']
+ALLOWED_HOSTS = [os.environ.get('APP_HOST','hc.eugene-prodan.com')]
 
 # Application definition
 
@@ -178,5 +178,5 @@ FLOCK_ATTACHMENT_HEIGHT = 150
 FRONTEND_PORT=os.environ.get('FRONTEND_PORT', 2053)
 
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = [os.environ.get('APP_HOST','hc.eugene-prodan.com')]
 CORS_ALLOW_HEADERS = ['authorization', 'content-type']

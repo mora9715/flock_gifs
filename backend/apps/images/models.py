@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 from django.utils.html import mark_safe
 from django.conf import settings
@@ -19,10 +21,10 @@ class ImageModel(models.Model):
         return self.name
 
     def image_tag(self):
-        return mark_safe(f'<img src="http://127.0.0.1:8000/{self.image.name}" height="150" />')
+        return mark_safe(f'<img src="https://{os.environ.get("APP_HOST")}:{settings.FRONTEND_PORT}/{self.image.name}" height="150" />')
 
     def thumbnail_tag(self):
-        return mark_safe(f'<img src="http://127.0.0.1:8000/{self.thumbnail.name}" height="50" />')
+        return mark_safe(f'<img src="https://{os.environ.get("APP_HOST")}:{settings.FRONTEND_PORT}/{self.thumbnail.name}" height="50" />')
 
     def max_width(self):
         return settings.FLOCK_ATTACHMENT_WIDTH
