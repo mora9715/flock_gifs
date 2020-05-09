@@ -97,7 +97,7 @@ class EventSerializer(serializers.Serializer):
             ]
         }
         api = FlockAPIClient(token=user.token)
-        api.client.chat.sendMessage(request_body=request_body)
+        api.client.chat.sendMessage.post(request_body=request_body)
 
 
 
