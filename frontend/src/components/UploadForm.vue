@@ -63,7 +63,7 @@ export default {
         const headers = {'Authorization': `Bearer ${_this.$globals.flockEventToken}`};
         const data = {'image': `${_this.imageSrc}==`, 'name': _this.name};
         axios
-          .post(`${this.$globals.backend}/api/images/upload/`, data, {headers: headers})
+          .post(`${_this.$globals.backend}/api/images/upload/`, data, {headers: headers})
           .then(response => {
             console.log(response);
             _this.$root.$emit('addToast','Good evening',`Uploaded ${_this.name}`, 'success', 3000);
