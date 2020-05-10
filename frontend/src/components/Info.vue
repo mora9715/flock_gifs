@@ -2,8 +2,7 @@
     <b-card-group deck>
         <b-card header="Project info">
             <p>Flock Gifs is an <i>open-source</i> project. </p>
-            <p>Source code is available <a href="https://github.com/mora9715/flock_gifs">here</a> and <a
-                    href="https://github.com/mora9715/flock_frontend">here</a>.</p>
+            <p>Source code is available <a href="https://github.com/mora9715/flock_gifs">here</a>.</p>
         </b-card>
         <b-card header="Software stack">
             <p>Frontend:</p>
