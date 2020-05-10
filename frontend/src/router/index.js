@@ -5,9 +5,10 @@ import Featured from '../components/Featured'
 import Info from '../components/Info'
 import UploadForm from '../components/UploadForm'
 import Error from '../components/Error'
+import Settings from '../components/Settings'
 
 const router = new VueRouter({
-    routes: [
+  routes: [
     {
       path: '/',
       component: All,
@@ -37,9 +38,15 @@ const router = new VueRouter({
       component: Error,
       name: 'error',
       props: true
+    },
+    {
+      path: '/settings',
+      component: Settings,
+      name: 'settings',
+      props: true
     }
-    ],
-     // mode: 'history'
-  });
+  ],
+  // mode: 'history'
+});
 
 export default router;

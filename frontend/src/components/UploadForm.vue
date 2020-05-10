@@ -42,11 +42,7 @@
     },
     computed: {
       isAuthorized: function () {
-        if (this.$globals.flockEventToken && this.$globals.flockEvent) {
-          return true;
-        } else {
-          return false;
-        }
+        return this.$globals.flockEventToken && this.$globals.flockEvent
       }
     },
     methods: {
