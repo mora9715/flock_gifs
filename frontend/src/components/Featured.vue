@@ -80,7 +80,11 @@
     },
     computed: {
       perPage() {
-        return this.$globals.imageMeta['itemsPerPage'];
+        if (this.$globals.imageMeta !== null) {
+          return this.$globals.imageMeta['itemsPerPage']
+        } else {
+          return 10
+        }
       },
       rows() {
         return this.imageList.length

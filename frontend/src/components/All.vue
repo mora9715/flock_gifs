@@ -55,11 +55,12 @@
         axios
           .get(`${this.$globals.backend}/api/images/`, {headers: headers})
           .then(response => {
+            response.data['images'].sort((a,b) => a.timesUsed < b.timesUsed);
             this.imageList = response.data['images'];
             this.$globals.imageMeta = response.data['imageMeta'];
           })
           .catch(error => {
-            console.log(error)
+            console.log(error);
             this.$router.push('error');
           })
           .finally(() => {
@@ -83,8 +84,12 @@
         return this.currentPage * this.perPage
       },
       perPage() {
-        return this.$globals.imageMeta['itemsPerPage'];
-      }
+        if (this.$globals.imageMeta !== null) {
+          return this.$globals.imageMeta['itemsPerPage']
+        } else {
+          return 10
+        }
+      },
     }
   }
 </script>
