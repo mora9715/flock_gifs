@@ -9,7 +9,7 @@
   <img
     :src='source'
     alt=""
-    style="z-index: -1;"
+    style="z-index: -1; min-height:60px;"
     :style="{maxWidth: $globals.imageMeta['maxImageWidth']+'px', maxHeight: $globals.imageMeta['maxImageHeight']+'px'}"
   >
 </div>
