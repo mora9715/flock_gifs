@@ -15,7 +15,7 @@ class ImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.ImageModel
-        fields = ('id', 'name', 'image', 'thumbnail')
+        fields = ('id', 'name', 'image', 'thumbnail', 'times_used')
 
     def validate_name(self, name):
         return name.strip()

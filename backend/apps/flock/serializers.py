@@ -73,11 +73,13 @@ class EventSerializer(serializers.Serializer):
             raise exceptions.NotFound
 
         img_name = self.validated_data.get('text', '').strip()
-
         try:
-            img_tag = f"https://{request.META['HTTP_HOST']}:{settings.FRONTEND_PORT}/{ImageModel.objects.get(name=img_name).image}"
+            img = ImageModel.objects.get(name=img_name)
         except ImageModel.DoesNotExist:
             return True
+
+        img_tag = f"https://{request.META['HTTP_HOST']}:{settings.FRONTEND_PORT}/{img.image}"
+
 
         request_body = {
             'to': self.validated_data['chat'],
@@ -98,6 +100,8 @@ class EventSerializer(serializers.Serializer):
         }
         api = FlockAPIClient(token=user.token)
         api.client.chat.sendMessage.post(request_body=request_body)
+        img.times_used += 1
+        img.save()
 
 
 

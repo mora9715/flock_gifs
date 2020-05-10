@@ -11,6 +11,7 @@ class ImageModel(models.Model):
     thumbnail = models.ImageField(upload_to='img/', blank=False)
     ts = models.DateTimeField(auto_now_add=True)
     uploaded_by = models.ForeignKey("flock.User", blank=True, null=True, on_delete=models.DO_NOTHING)
+    times_used = models.IntegerField(default=0)
 
     def delete(self, *args, **kwargs):
         self.image.delete()
