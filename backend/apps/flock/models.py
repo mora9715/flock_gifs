@@ -20,6 +20,7 @@ class User(models.Model):
     )
     max_image_width = models.IntegerField(default=150)
     max_image_height = models.IntegerField(default=150)
+    items_per_page = models.IntegerField(default=20)
 
     def __str__(self):
         return self.name
@@ -32,5 +33,6 @@ class User(models.Model):
     def image_meta(self):
         return {
             'max_image_width': self.max_image_width,
-            'max_image_height': self.max_image_height
+            'max_image_height': self.max_image_height,
+            'items_per_page': self.items_per_page
         }

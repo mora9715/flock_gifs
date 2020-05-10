@@ -43,7 +43,6 @@
         imageList: [],
         loading: true,
         currentPage: 1,
-        perPage: 6,
       }
     },
     components: {
@@ -82,6 +81,9 @@
       },
       endNumber() {
         return this.currentPage * this.perPage
+      },
+      perPage() {
+        return this.$globals.imageMeta['itemsPerPage'];
       }
     }
   }

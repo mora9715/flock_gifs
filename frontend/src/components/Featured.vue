@@ -7,7 +7,7 @@
                          :is-full-page="true"></loading>
                 <div v-if="imageList && imageList != 0">
                     <div v-masonry="" transition-duration="0.3s" item-selector=".item" gutter="5">
-                        <div v-for="image in imageList" :key="image.id" v-masonry-tile class="item">
+                        <div v-for="image in imageList.slice(startNumber,endNumber)" :key="image.id" v-masonry-tile class="item">
                             <FeaturedImageHolder :img="image" style="margin-top: 5px;"/>
                         </div>
                     </div>
@@ -43,7 +43,6 @@
         imageList: [],
         loading: true,
         currentPage: 1,
-        perPage: 6,
       }
     },
     components: {
@@ -80,6 +79,9 @@
       }
     },
     computed: {
+      perPage() {
+        return this.$globals.imageMeta['itemsPerPage'];
+      },
       rows() {
         return this.imageList.length
       },
