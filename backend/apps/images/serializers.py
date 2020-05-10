@@ -42,8 +42,6 @@ class ImageMetaSerializer(serializers.ModelSerializer):
 
     def save(self):
         for key in self.initial_data.get('image_meta', {}).keys():
-            print('processing key ',key)
             if key in self.data['image_meta']:
-                print('key in data!')
                 setattr(self.instance, key, self.initial_data['image_meta'][key])
         return self.instance.save()
