@@ -5,6 +5,7 @@ from rest_framework.permissions import AllowAny
 from django.core.exceptions import ObjectDoesNotExist
 
 from apps.flock import serializers, models
+from apps.images.serializers import ImageMetaSerializer
 
 
 class EventViewSet(viewsets.GenericViewSet):
@@ -48,7 +49,25 @@ class FeaturedViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
         serializer.update(user)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+class MetaViewSet(viewsets.GenericViewSet):
+    serializer_class = ImageMetaSerializer
+
+    @action(detail=False, methods=['get'], url_path='list')
+    def get_meta(self, request, *args, **kwargs):
+        serializer = self.serializer_class(self.request.user)
+        return Response(data=serializer.data)
+
+    @action(detail=False, methods=['post'], url_path='update')
+    def update_meta(self, request, *args, **kwargs):
+        print(self.request.user)
+        serializer = self.serializer_class(self.request.user, data=self.request.data)
+        serializer.is_valid(raise_exception=True)
+        print(serializer.initial_data)
+        serializer.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 router = routers.DefaultRouter()
 router.register(r'api/flock', EventViewSet, basename='flock')
 router.register(r'api/featured', FeaturedViewSet, basename='featured')
+router.register(r'api/meta', MetaViewSet, basename='meta')
