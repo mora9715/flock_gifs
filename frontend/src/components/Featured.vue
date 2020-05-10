@@ -10,6 +10,15 @@
           <FeaturedImageHolder :img="image" style="margin-top: 5px;"/>
         </div>
       </div>
+      <br>
+      <b-pagination
+      v-model="currentPage"
+      :total-rows="rows"
+      :per-page="perPage"
+      align="fill"
+      pills
+      size="sm"
+    ></b-pagination>
     </div>
     <h2 v-else-if="loading"></h2>
     <h2 v-else>No featured images yet</h2>
@@ -30,6 +39,8 @@ export default {
     return {
       imageList: [],
       loading: true,
+      currentPage: 1,
+      perPage: 6,
     }
   },
   components: {
@@ -58,6 +69,17 @@ export default {
     } else {
       console.error('Received no authorization data');
       this.$router.push('error');
+    }
+  },
+  computed: {
+    rows()  {
+      return this.imageList.length
+    },
+    startNumber() {
+      return (this.currentPage - 1) * this.perPage
+    },
+    endNumber() {
+      return this.currentPage * this.perPage
     }
   }
 }

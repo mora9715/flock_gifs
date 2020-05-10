@@ -6,10 +6,19 @@
         :is-full-page="true"></loading>
     <div v-if="imageList.length != 0">
       <div v-masonry="" transition-duration="0.3s" item-selector=".item" gutter="5">
-        <div v-for="image in imageList" :key="image.id" v-masonry-tile class="item">
+        <div v-for="image in imageList.slice(startNumber,endNumber)" :key="image.id" v-masonry-tile class="item">
           <AllImageHolder :img="image" style="margin-top: 5px;"/>
         </div>
       </div>
+      <br>
+      <b-pagination
+      v-model="currentPage"
+      :total-rows="rows"
+      :per-page="perPage"
+      align="fill"
+      pills
+      size="sm"
+    ></b-pagination>
     </div>
     <h2 v-else-if="loading"></h2>
     <h2 v-else>No images yet</h2>
@@ -31,6 +40,8 @@ export default {
     return {
       imageList: [],
       loading: true,
+      currentPage: 1,
+      perPage: 6,
     }
   },
   components: {
@@ -56,11 +67,24 @@ export default {
       this.$router.push('error');
     }
     console.log(this.$globals);
+  },
+  computed: {
+    rows()  {
+      return this.imageList.length
+    },
+    startNumber() {
+      return (this.currentPage - 1) * this.perPage
+    },
+    endNumber() {
+      return this.currentPage * this.perPage
+    }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+
+@import '../assets/theme.scss';
 
 .image-holder {
   margin-left: 5px;
@@ -68,4 +92,7 @@ export default {
 h5 {
   text-align: center;
 }
+
+
+
 </style>
