@@ -1,16 +1,15 @@
 <template>
-    <div @mouseover="isHovered=true" @mouseleave="isHovered=false" class="holder holder-focus">
+    <div @mouseover="isHovered=true" @click="copyImage()" @mouseleave="isHovered=false" class="holder holder-focus">
         <div v-if="isHovered" class="holder-top-right">
             <b-icon-star-fill @click="processFeatured()" class="holder-icon-focus" font-scale="1.3" variant="warning"/>
-        </div>
-        <div v-if="isHovered" class="holder-bottom-right">
-            <b-icon-clipboard-data @click="copyImage()" class="holder-icon-focus" font-scale="1.3" variant="primary"/>
         </div>
         <img
                 :src='source'
                 alt=""
                 :style="{maxWidth: $globals.imageMeta['maxImageWidth']+'px', maxHeight: $globals.imageMeta['maxImageHeight']+'px'}"
                 style="z-index: -1; min-height:60px;"
+                v-b-tooltip.hover
+                :title="img.name"
         >
     </div>
 </template>
@@ -25,6 +24,7 @@
     data() {
       return {
         isHovered: false,
+        pepe: true
       }
     },
     props: {
@@ -75,12 +75,6 @@
         right: 5px;
     }
 
-    .holder-bottom-right {
-        position: absolute;
-        top: 35px;
-        right: 5px;
-    }
-
     .holder-icon-focus {
         transition: .2s;
     }
@@ -95,6 +89,7 @@
     }
 
     .holder-focus:hover {
+        cursor: pointer;
         transform: scale(1.04); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
         box-shadow: 0px 0px 10px 5px rgba(84, 84, 84, 1);
     }
