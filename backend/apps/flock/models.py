@@ -18,8 +18,8 @@ class User(models.Model):
         ImageModel,
         blank=True,
     )
-    max_image_width = models.IntegerField(default=150)
-    max_image_height = models.IntegerField(default=150)
+    max_image_width = models.IntegerField(default=110)
+    max_image_height = models.IntegerField(default=110)
     items_per_page = models.IntegerField(default=20)
 
     def __str__(self):
