@@ -8,6 +8,7 @@
                 serving as the abode after death of crashed pages<br/>
                 and of the righteous visitors who died trying to access the content.
             </p>
+            <button @click="openBrowser" >hi</button>
         </div>
 
     </div>
@@ -18,6 +19,17 @@
     name: 'Error',
     data() {
       return {}
+    },
+    created() {
+      this.$loadScript('https://apps-static.flock.co/js-sdk/1.8.6/flock.js')
+    },
+    methods: {
+      openBrowser: function() {
+        console.log('clicked');
+        /* eslint-disable */
+        flock.openBrowser('https://apps.flock.com/manage')
+        /* eslint-enable */
+      }
     }
   }
 </script>

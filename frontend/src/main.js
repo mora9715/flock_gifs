@@ -3,9 +3,9 @@ import VueRouter from 'vue-router'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import {VueMasonryPlugin} from 'vue-masonry'
 import VueClipboard from 'vue-clipboard2'
-
 import App from './App'
 import router from './router'
+import LoadScript from 'vue-plugin-load-script';
 
 Vue.config.productionTip = false
 
@@ -14,16 +14,17 @@ Vue.use(IconsPlugin)
 Vue.use(VueMasonryPlugin)
 Vue.use(VueClipboard)
 Vue.use(VueRouter)
+Vue.use(LoadScript);
 
 // Global variables available to all components
 const globalStore = new Vue({
   data: {
     slashCommand: '/hcc',
-    backend: '',
+    backend: 'http://localhost:8000',
     flockEventToken: null,
     flockTheme: null,
     flockEvent: null,
-    imageMeta: null
+    imageMeta: null,
   }
 })
 Vue.prototype.$globals = globalStore;
