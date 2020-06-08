@@ -39,7 +39,7 @@
     },
     computed: {
       isAuthorized: function () {
-        return this.$globals.flockEventToken && this.$globals.flockEvent
+        return this.$globals.flockEventToken && this.$globals.flockEvent && this.maxWidth
       }
     },
     methods: {
