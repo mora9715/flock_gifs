@@ -19,8 +19,8 @@ Vue.use(LoadScript);
 // Global variables available to all components
 const globalStore = new Vue({
   data: {
-    slashCommand: '/hcc',
-    backend: 'http://localhost:8000',
+    slashCommand: '/hc',
+    backend: '',
     flockEventToken: null,
     flockTheme: null,
     flockEvent: null,
