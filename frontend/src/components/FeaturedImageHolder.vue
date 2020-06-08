@@ -1,5 +1,5 @@
 <template>
-    <div @mouseover="isHovered=true" @click="copyImage()" @mouseleave="isHovered=false" class="holder holder-focus">
+    <div @mouseover="isHovered=true" @mouseleave="isHovered=false" class="holder holder-focus">
         <div v-if="isHovered" class="holder-top-right">
             <b-icon-x-circle-fill @click="processFeatured()" class="holder-icon-focus" font-scale="1.3"
                                   variant="danger"/>
@@ -11,6 +11,7 @@
                 :style="{maxWidth: $globals.imageMeta['maxImageWidth']+'px', maxHeight: $globals.imageMeta['maxImageHeight']+'px'}"
                 v-b-tooltip.hover
                 :title="img.name"
+                @click="copyImage()"
         >
     </div>
 </template>

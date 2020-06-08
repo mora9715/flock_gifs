@@ -1,5 +1,5 @@
 <template>
-    <div @mouseover="isHovered=true" @click="copyImage()" @mouseleave="isHovered=false" class="holder holder-focus">
+    <div @mouseover="isHovered=true" @mouseleave="isHovered=false" class="holder holder-focus">
         <div v-if="isHovered" class="holder-top-right">
             <b-icon-star-fill @click="processFeatured()" class="holder-icon-focus" font-scale="1.3" variant="warning"/>
         </div>
@@ -10,6 +10,7 @@
                 style="z-index: -1; min-height:60px;"
                 v-b-tooltip.hover
                 :title="img.name"
+                @click="copyImage()"
         >
     </div>
 </template>
