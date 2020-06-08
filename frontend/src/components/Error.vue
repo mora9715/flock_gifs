@@ -8,7 +8,7 @@
                 serving as the abode after death of crashed pages<br/>
                 and of the righteous visitors who died trying to access the content.
             </p>
-            <p>Try reinstalling app <b-button style="background-color:#aaaaaa;" @click="openBrowser">here</b-button> if you see this page.</p>
+            <p>Try reinstalling app <b-button style="background-color:#aaaaaa;" @click="openBrowser">here</b-button> if you see this page for the first time.</p>
         </div>
 
     </div>
