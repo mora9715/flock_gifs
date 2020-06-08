@@ -5,4 +5,4 @@ from apps.images import models
 @admin.register(models.ImageModel)
 class ImageAdmin(admin.ModelAdmin):
     readonly_fields = ('image_tag',)
-    list_display = ('id', 'name', 'thumbnail_tag',)
+    list_display = ('id', 'name', 'thumbnail_tag', 'times_used')

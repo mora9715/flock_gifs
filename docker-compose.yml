@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Docker/backend/Dockerfile
-    command: bash -c "gunicorn flock_gifs.wsgi -b 0.0.0.0:8000 -w 1 --threads=100 --access-logfile=- "
+    command: bash -c "gunicorn flock_gifs.wsgi -b 0.0.0.0:8000 -w 1 --threads=100 --access-logfile=- --log-level debug"
     env_file:
       - .backend.env
     volumes:
@@ -18,7 +18,7 @@ services:
       context: .
       dockerfile: Docker/frontend/Dockerfile
     ports:
-      - "2053:2053"
+      - "443:443"
     volumes:
       - /home/mora/sandbox/img/:/usr/share/img/
       - /home/mora/sandbox/certs/:/etc/nginx/certs/
